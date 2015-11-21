@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+	<package name="login" namespace="/" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="myinterceptor"
+				class="org.koushik.javabrains.interceptor.MyInterceptor" />
+		</interceptors>
+
+		<action name="login" class="com.tutorialspoint.struts2.LoginAction">
+			<result name="success">/successLogin.jsp</result>
+			<result name="error">/errorLogin.jsp</result>
+			<!-- stuts2 validate method indicate this if any field errors were found -->
+			<result name="input">index.jsp</result>
+		</action>
+
+		<action name="login2" class="org.koushik.javabrains.action.LoginModelAction">
+			<result name="success">/successLogin.jsp</result>
+			<result name="error">/errorLogin.jsp</result>
+			<result name="input">errorLogin2.jsp</result>
+		</action>
+
+		<action name="login3" class="org.koushik.javabrains.action.LoginAction">
+			<!-- adding interceptor-cookie does nothing, but wanted to see if the 
+				defaultStack was still avail, was not, so when adding interceptors you have 
+				to add the defaultStack if you still want those interceptors available -->
+			<interceptor-ref name="myinterceptor"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">/successLogin.jsp</result>
+			<result name="error">/index.jsp</result>
+			<result name="input">index.jsp</result>
+			<!-- validate returns input if any field errors were found -->
+
+		</action>
+
+	</package>
+
+
+</struts>    
