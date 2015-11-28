@@ -1,23 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@ taglib prefix="s" uri="/struts-tags"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Hello World</title>
 </head>
-<body>
+<body>	
 
 	<h4>Basic helloWorld .</h4>
 	<s:form action="hello">
 		<s:textfield label="Please enter your name." name="name" value="Jay" />
 		<s:select name="type" label="Type of HelloWorld Test"
 			list="{'basic','dumpSession'}" />
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
+	
+	
+	<h4>Basic helloWorld with Tags and Action class.</h4>
+	<!--  note in this example userName is never used in any action class -->
+	<p><a href="<s:url action='hello'/>">Hello World</a></p>
+	<s:url action="hello2" var="helloLink">
+		<s:param name="userName">Bruce Phillips</s:param>
+	</s:url>
+
+	<p> <a href="${helloLink}">Hello Bruce Phillips</a> </p>
+
+	<p>Get your own personal hello by filling out and submitting this form.</p>
+
+	<s:form action="hello2">
+		<s:textfield name="userName" label="Your name" />		
+		<s:submit value="Submit" align="left" />
+	</s:form>
+	<p><a href="register.jsp">Please register</a> for our prize drawing.</p>
+	
+	<! -- -------------------------------------- -->
+	
 
 	<h4>Basic login Connects to MySQL Database.</h4>
 	<s:form action="login" method="post" namespace="/">
@@ -25,14 +45,14 @@
 			key="userId" theme="xhtml" />
 		<s:textfield label="Please enter your Password." value="navy"
 			key="password" theme="xhtml" />
-		<s:submit value="Login"></s:submit>
+		<s:submit value="Login"  align="left"></s:submit>
 	</s:form>
 
 	<h4>Login using getModel in action class</h4>
 	<s:form action="login2" method="post" namespace="/">
 		<s:textfield label="Login ID" key="userId" value="Jay" />
 		<s:password label="Password" key="password" />
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 	<h4>Login using my own interceptor class.</h4>
@@ -41,26 +61,26 @@
 			key="userId" />
 		<s:textfield label="Please enter your Password." value="password"
 			key="password" />
-		<s:submit value="Login"></s:submit>
+		<s:submit value="Login"  align="left"></s:submit>
 	</s:form>
 
 	<h4>Display ValueStack and Session.</h4>
 	<s:form action="hello1">
 		<s:textfield label="Please enter your name." key="name" value="Jay" />
 		<s:textfield label="test type" key="type" value="dumpSession" />
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 	<h4>Dummy action, displays jsp with no java action getting called</h4>
 	<s:form action="searchForm" method="post" namespace="/">
-		<s:submit value="Find Tutorials"></s:submit>
+		<s:submit value="Find Tutorials"  align="left"></s:submit>
 	</s:form>
 	<br />
 
 	<h4>Upload a file.</h4>
 	<s:form action="upload" method="post" enctype="multipart/form-data">
 		<s:file label="Upload your file." key="myFile" />
-		<s:submit value="Upload"></s:submit>
+		<s:submit value="Upload"  align="left"></s:submit>
 	</s:form>
 
 	<h4>Send an Email.</h4>
@@ -70,7 +90,7 @@
 		<s:textfield label="Password" value="EJohn969" key="password" />
 		<s:textfield label="Subject" value="My Test Subject" key="subject" />
 		<s:textfield label="Body" value="My Test Body" key="body" />
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 
@@ -78,7 +98,7 @@
 	<s:form action="empinfo" method="post">
 		<s:textfield name="name" label="Name" size="20" />
 		<s:textfield name="age" label="Age" size="20" />
-		<s:submit name="submit" label="Submit" align="right" />
+		<s:submit name="Submit" align="left" label="Submit" />
 	</s:form>
 
 
@@ -88,7 +108,7 @@
 	<s:form action="empinfo2" method="post">
 		<s:textfield name="name" label="Name" size="20" />
 		<s:textfield name="age" label="Age" size="20" />
-		<s:submit name="submit" label="Submit" align="right" />
+		<s:submit name="Submit" align="left" label="Submit" />
 	</s:form>
 
 
@@ -114,25 +134,25 @@
 	<s:form action="empinfo" method="post" namespace="/">
 		<s:textfield name="name" key="global.name" size="20" />
 		<s:textfield name="age" key="global.age" size="20" />
-		<s:submit name="submit" key="global.submit" />
+		<s:submit name="Submit" align="left" key="global.submit" />
 	</s:form>
 
 	<h4>eException handling, This demonstrates how conversion is done
 		with objects</h4>
 	<s:form action="helloException" method="post">
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 	<h4>Struts 2 list, collection, merging and appending of lists.</h4>
 	<s:form action="employee" method="post">
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 	<br />
 
 	<h4>Action tag call action directly from jsp page.</h4>
 	<s:form action="testActoinTag" method="post">
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 	<br />
@@ -142,17 +162,17 @@
 
 	<h4>property tag, set, push and property usage</h4>
 	<s:form action="system" method="post">
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 	<h4>Date Tags</h4>
 	<s:form action="helloDate" method="post">
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 	<h4>Text Tags Uses HelloText.properties</h4>
 	<s:form action="helloText" method="post">
-		<s:submit></s:submit>
+		<s:submit  align="left"></s:submit>
 	</s:form>
 
 	<h4>Url Tags creates a URL that when clicked will call an action</h4>
@@ -166,12 +186,12 @@
 
 	<h4>UI tag examples</h4>
 	<s:form action="uiExample" method="post" namespace="/">
-		<s:submit></s:submit>
+		<s:submit align="left"></s:submit>
 	</s:form>
 
 	<h4>Ajax tag examples</h4>
 	<s:form action="autoCompleterAction" method="post" namespace="/">
-		<s:submit></s:submit>
+		<s:submit align="left"></s:submit>
 	</s:form>
 
 
