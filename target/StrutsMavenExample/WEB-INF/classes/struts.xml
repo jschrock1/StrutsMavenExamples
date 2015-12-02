@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- <constant name="struts.custom.i18n.resources" value="global" /> -->
+
+
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.maxSize" value="1000000" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+
+
+	<!-- I had to comment these out to get the system to find the property files 
+		not sure what they really do <constant name="struts.custom.i18n.resources" 
+		value="ApplicationResources"/> -->
+
+	<include file="login.xml" />
+
+	<package name="user" namespace="/user" extends="struts-default">
+		<action name="login5">
+			<result>pages/login.jsp</result>
+		</action>
+		<action name="validateUser" class="com.mkyong.user.action.LoginAction">
+			<result name="SUCCESS">pages/welcome.jsp</result>
+			<result name="input">pages/login5.jsp</result>
+		</action>
+	</package>
+
+	<package name="helloworld" extends="struts-default">
+
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.NullPointerException"
+				result="errorException" />
+		</global-exception-mappings>
+
+		<!-- If no class attribute is specified the framework will assume success 
+			and render the result index.jsp -->
+		<!-- If no name value for the result node is specified the success value 
+			is the default -->
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+
+		<!-- If the URL is hello.action the call the execute method of class HelloWorldAction. 
+			If the result returned by the execute method is success render the HelloWorld.jsp -->
+		<action name="hello2"
+			class="org.apache.struts.using_tags.helloworld.action.HelloWorldAction"
+			method="execute">
+			<result name="success">/HelloWorld2.jsp</result>
+		</action>
+
+		<action name="hello" class="com.tutorialspoint.struts2.HelloWorldAction"
+			method="execute">
+			<result name="success">/HelloWorld.jsp</result>
+			<result name="error">/AccessDenied.jsp</result>
+		</action>
+
+		<action name="hello1" class="com.tutorialspoint.struts2.HelloWorldAction"
+			method="execute">
+			<interceptor-ref name="cookie"></interceptor-ref>
+			<interceptor-ref name="cookieProvider"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">/HelloWorld.jsp</result>
+			<result name="error">/AccessDenied.jsp</result>
+		</action>
+
+		<action name="upload" class="com.tutorialspoint.struts2.UploadFile">
+			<result name="success">/successFileUpload.jsp</result>
+			<result name="error">/errorFileUpload.jsp</result>
+		</action>
+
+		<action name="register" class="org.apache.struts.register.action.Register">
+			<result name="success">/thankyou.jsp</result>
+			<result name="input">/register.jsp</result>
+		</action>
+
+		<action name="emailer" class="com.tutorialspoint.struts2.Emailer"
+			method="execute">
+			<result name="success">/successEmail.jsp</result>
+			<result name="error">/errorEmail.jsp</result>
+		</action>
+
+		<action name="empinfo" class="com.tutorialspoint.struts2.Employee"
+			method="execute">
+			<result name="input">/index.jsp</result>
+			<result name="success">/successVal.jsp</result>
+		</action>
+
+		<action name="locale" class="com.tutorialspoint.struts2.Locale"
+			method="execute">
+			<result name="success">/index.jsp</result>
+		</action>
+
+		<action name="empinfo2" class="com.tutorialspoint.struts2.Employee2"
+			method="execute">
+			<result name="input">/index.jsp</result>
+			<result name="success">/successVal.jsp</result>
+		</action>
+
+		<action name="system" class="com.tutorialspoint.struts2.SystemDetails"
+			method="execute">
+			<result name="success">/System.jsp</result>
+		</action>
+
+		<action name="helloException" class="com.tutorialspoint.struts2.HelloException"
+			method="execute">
+			<interceptor-ref name="params" />
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="errorException">/errorException.jsp</result>
+			<result name="success">/success.jsp</result>
+		</action>
+
+		<action name="employee" class="com.tutorialspoint.struts2.Employee3"
+			method="execute">
+			<result name="success">/employee.jsp</result>
+		</action>
+
+		<action name="employee" class="com.tutorialspoint.struts2.Employee3"
+			method="execute">
+			<result name="success">/employee.jsp</result>
+		</action>
+
+		<action name="rainbow" class="com.tutorialspoint.struts2.HelloWorldAction"
+			method="doNothingMethod">
+			<result name="success">/HelloWorld.jsp</result>
+		</action>
+
+		<action name="doNothing" class="com.tutorialspoint.struts2.Employee3"
+			method="execute">
+			<result name="success">/generatorTag.jsp</result>
+		</action>
+
+		<action name="testActoinTag" class="com.tutorialspoint.struts2.Employee3"
+			method="execute">
+			<result name="success">/callAction.jsp</result>
+		</action>
+
+		<action name="helloDate" method="execute">
+			<result name="success">/dateFormat.jsp</result>
+		</action>
+
+		<action name="helloText" method="execute">
+			<result name="success">/helloText.jsp</result>
+		</action>
+
+		<action name="autoCompleterAction" class="com.tutorialspoint.struts2.AutoCompleterAction"
+			method="display">
+			<result name="none">autocompleter.jsp</result>
+		</action>
+
+		<action name="resultAction" class="com.tutorialspoint.struts2.AutoCompleterAction">
+			<result name="success">resultAjax.jsp</result>
+		</action>
+
+
+		<!-- action name="hello" class="com.tutorialspoint.struts2.HelloWorldAction" 
+			method="execute"> <result name="success" type="freemarker"> <param name="location">/hello.fm</param> 
+			</result> <result name="error"> /AccessDenied.jsp </result> </action -->
+
+	</package>
+
+	<package name="Tutorials" namespace="/tutorials" extends="struts-default">
+
+		<action name="getTutorial" class="org.koushik.javabrains.action.TutorialAction">
+			<result name="success">/successGetTutorial.jsp</result>
+			<result name="fail">/error.jsp</result>
+			<result name="input">/searchForm.jsp</result>
+		</action>
+
+		<action name="get*" class="org.koushik.javabrains.action.{1}Action">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/error.jsp</result>
+		</action>
+
+		<action name="addTutorial" class="org.koushik.javabrains.action.TutorialAction"
+			method="addTutorial">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/error.jsp</result>
+		</action>
+
+		<action name="deleteTutorial" class="org.koushik.javabrains.action.TutorialAction"
+			method="deleteTutorial">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/error.jsp</result>
+		</action>
+
+		<action name="*" class="org.koushik.javabrains.action.TutorialAction"
+			method="{1}">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/error.jsp</result>
+		</action>
+	</package>
+
+	<package name="search" namespace="/" extends="struts-default">
+		<action name="searchForm">
+			<result>/searchForm.jsp</result>
+		</action>
+		<action name="search*">
+			<result>/search{1}</result>
+		</action>
+	</package>
+
+	<package name="UiExamples" namespace="/" extends="struts-default">
+		<action name="uiExample">
+			<result>/uiExample.jsp</result>
+		</action>
+	</package>
+
+</struts>

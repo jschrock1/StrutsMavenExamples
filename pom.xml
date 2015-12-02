@@ -8,6 +8,9 @@
 	<name>StrutsMavenExample Webapp</name>
 	<url>http://maven.apache.org</url>
 
+
+   
+
 	<dependencies>
 
 		<dependency>
@@ -93,7 +96,24 @@
 
 	</dependencies>
 
+
 	<build>
+
+		<pluginManagement>
+		      <plugins>
+		        <plugin>
+		          <groupId>org.apache.tomcat.maven</groupId>
+		          <artifactId>tomcat7-maven-plugin</artifactId>
+		          <version>2.2</version>
+		          <configuration>
+		          	<url>http://localhost:8080/StrutsMavenExample/</url>
+					<server>TomcatServer</server>
+					<path>/target</path>
+				</configuration>
+		        </plugin>
+		      </plugins>
+		</pluginManagement>
+
 		<finalName>StrutsMavenExample</finalName>
 	</build>
 </project>
