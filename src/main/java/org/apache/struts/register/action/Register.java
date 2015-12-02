@@ -1,6 +1,8 @@
 package org.apache.struts.register.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+
+import org.apache.struts.register.exceptions.SecurityBreachException;
 import org.apache.struts.register.model.Person;
 
 /**
@@ -17,6 +19,7 @@ public class Register extends ActionSupport {
 	
 	public void validate(){
 	     
+		System.out.println("In validate of Register");
 		if (personBean.getFirstName().length() == 0) {
 
 			addFieldError("personBean.firstName", "First name is required.");
@@ -42,9 +45,22 @@ public class Register extends ActionSupport {
 	public String execute() throws Exception {
 		
 		//call Service class to store personBean's state in database
-		
+		System.out.println("In execute of Register");
 		return SUCCESS;
 		
+	}
+	
+	public void throwNullPointerException() throws NullPointerException {
+
+		throw new NullPointerException("Null Pointer Exception thrown from "
+				+ Register.class.toString());
+	}
+
+	public void throwSecurityException() throws SecurityBreachException {
+
+		System.out.println("In throwSecurityException of Register");
+		throw new SecurityBreachException(
+				"Security breach exception thrown from throwSecurityException");
 	}
 	
 	public Person getPersonBean() {

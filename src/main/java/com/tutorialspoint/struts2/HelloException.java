@@ -19,6 +19,10 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 public class HelloException   extends ActionSupport  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String exceptionStr;
 	
 	public void validate() {
